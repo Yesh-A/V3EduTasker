@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Group Analytics</title>
+
+  <!-- External CSS -->
+  <link rel="stylesheet" href="evalSec2.css" />
+
+  <!-- Font Awesome -->
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    integrity="sha512-yH6RZ39F+KzWn6sX8Q0p0X9F6zKME0OfyDkKMK8Az9PGNTDixHdU0m0z9j5yPzFxAzZrMZ3eE4U/qqmwySl9Vg=="
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+  />
+
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <!-- JavaScript -->
+  <script src="evalSec2.js"></script>
+</head>
+<body>
+
+<!--MAIN CONTENT-->
+  <!-- Header -->
+  <div class="header">
+    <span>Evaluation & Analyticts</span>
+    <div id="groupDisplay">Loading group info...</div>
+  </div>
+
+
+  <main class="container">
+    <!-- Progress Overview -->
+    <section class="section">
+      <h3 class="section-title">
+        <i class="fas fa-chart-pie"></i> PROGRESS OVERVIEW
+      </h3>
+      <div class="progress-container">
+        <div class="chart-wrapper">
+          <canvas id="progressChart"  width="300" height="300"></canvas>
+          <div id="progressLabel" class="chart-label">12.5%</div>
+        </div>
+        <ul class="task-info-list">
+          <li><strong>TOTAL TASK FOR THE PROJECT:</strong> <span id="totalTasks">8</span></li>
+          <li><strong>REMAINING TASKS:</strong> <span id="remainingTasks">7</span></li>
+          <li><strong>COMPLETED TASK:</strong> <span id="completedTasks">1</span></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Task Contribution Table -->
+    <section class="section">
+      <h3 class="section-title">
+        <i class="fas fa-users"></i> TASK CONTRIBUTION BREAKDOWN
+      </h3>
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>MEMBERS</th>
+              <th>TASKS COMPLETED</th>
+              <th>PERCENTAGE OF TOTAL CONTRIBUTIONS</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>ASHLEY</td>
+              <td>1</td>
+              <td>12.5%</td>
+            </tr>
+            <tr>
+              <td>JOSHUA</td>
+              <td>0</td>
+              <td>0%</td>
+            </tr>
+            <tr>
+              <td>LIA</td>
+              <td>0</td>
+              <td>0%</td>
+            </tr>
+            <tr>
+              <td>MARK</td>
+              <td>0</td>
+              <td>0%</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+</body>
+</html>
