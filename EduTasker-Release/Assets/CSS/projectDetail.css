@@ -1,0 +1,591 @@
+.project-detail {
+  display: none;
+  margin-top: 1rem;
+  border-radius: 1rem;
+  padding: 1.5rem;
+  background-color: #ffffff;
+  font-family: 'Glacial Indifference', sans-serif;
+  animation: expandDetail 0.3s ease-in-out;
+}
+
+@keyframes expandDetail {
+  from {
+      transform: scaleY(0);
+      opacity: 0;
+  }
+  to {
+      transform: scaleY(1);
+      opacity: 1;
+  }
+}
+ 
+/* TASK STATUS */
+.task-status{
+  font-family: 'Glacial Indifference', sans-serif;
+  font-size: 28px;
+  color: #1A5E63;
+  font-weight: 600;
+  transition: opacity 0.3s, color 0.6s;
+}
+.kanban-button{
+  background-color: #F58A07; 
+  color: white; 
+  padding: 2px 16px; 
+  border: none; 
+  border-radius: 50px; 
+  cursor: pointer;
+  font-family: 'Glacial Indifference', sans-serif;
+  font-size: 18px;
+  font-weight: 600;
+  transform-style: preserve-3d;
+  perspective: 1000px;
+  transition: transform 0.6s, background-color 0.6s;
+  
+}
+
+.kanban-button:hover{
+  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+}
+
+/* Animation timing */
+.kanban-button, .task-status {
+  transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.to-do{
+  color: #FF4D3B;
+  font-family: 'Glacial Indifference', sans-serif;
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.task-table1{
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 15px;
+}
+.task-table1 td {
+  border: 2px solid #ccc;
+  padding: 8px;
+  text-align: center;
+  font-family: 'Glacial Indifference', sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+}
+.task-table1 th {
+  background-color: #FF2B2B;
+  padding: 15px;
+  border: 3px solid #EFE3D4;
+  color: #FFFFF7;
+  font-size: 18px;
+}
+
+/* In progress table*/
+.in-progress{
+  color: #FF8C00;
+  font-family: 'Glacial Indifference', sans-serif;
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.task-table2{
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 15px;
+}
+.task-table2 td {
+  border: 2px solid #ccc;
+  padding: 8px;
+  text-align: center;
+  font-family: 'Glacial Indifference', sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+}
+.task-table2 th {
+  background-color: #FF8C00 ;
+  padding: 15px;
+  border: 3px solid #EFE3D4;
+  color: #FFFFF7;
+  font-size: 18px;
+}
+
+/*completed Table */
+.completedtxt{
+  color: #04B466;
+  font-family: 'Glacial Indifference', sans-serif;
+  font-size: 24px;
+  font-weight: 600;
+}
+.completed-section-outer {
+  border: 4px solid #04B466;
+  border-radius: 12px;
+  padding: 0px;
+  overflow: hidden; 
+}
+.completed-section {
+  max-height: 200px;
+  overflow-y: auto;
+  padding: 1rem;
+  padding-right: 20px; 
+  margin-right: 15px; 
+  min-height: 200px;
+  font-weight: 600;
+}
+.completed-task {
+  padding: 8px 0px;
+  border-bottom: 2px solid #EFEFDA;
+  color: #1A5E63;
+  font-size: 24px;
+  font-weight: 600;
+}
+.completed-task:last-child {
+  border-bottom: none;
+}
+
+.completed-section::-webkit-scrollbar {
+  width: 8px;
+  height: 1px;
+}
+.completed-section::-webkit-scrollbar-track {
+  background: #EFEFDA;
+  margin: 4px;
+  height: 10px !important;
+}
+.completed-section::-webkit-scrollbar-thumb {
+  background: #4CAF50;
+  height: 10px;
+  border-top: 5px solid transparent;
+  border-bottom: 5px solid transparent;
+  background-clip: padding-box;
+}
+.completed-section::-webkit-scrollbar-thumb:hover {
+  background: #45a049;
+  border-top: 5px solid transparent;
+  border-bottom: 5px solid transparent;
+  background-clip: padding-box;
+}
+
+/* Action Buttons */
+.action-buttons {
+  display: grid;    
+  gap: 1rem;
+  justify-content: center;
+  padding-top: 10px;
+  font-size: 24px;
+  font-family: 'Glacial Indifference', sans-serif;
+}
+.finish-project {
+  background: #04B466;
+  color: white;
+  padding: 5px 30px;
+  border: none;
+  border-radius: 40px;
+  font-weight: 600;
+}
+.terminate-project {
+  background: white;
+  color: red;
+  padding: 5px 80px;
+  border: 4px solid red;
+  border-radius: 40px;
+  font-weight: 600;
+}
+
+/* Termination Modal Styles */
+#terminateConfirmModal {
+  animation: modalFadeIn 0.3s ease-out;
+}
+
+@keyframes modalFadeIn {
+  from { opacity: 0; transform: translateY(-20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+#terminateConfirmModal .bg-white {
+  box-shadow: 0px 10px 30px rgba(0,0,0,0.2);
+  border: 2px solid #dc2626;
+}
+
+/* Kanban Board Styles */
+.kanban-container {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 1rem;
+  justify-content: space-between;
+  height: 500px;
+  overflow: auto;
+}
+
+.kanban-column-group {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-width: 0px;
+  height: 100%;
+  padding-top: 30px;
+}
+
+.kanban-column-title {
+  font-family: 'Glacial Indifference', sans-serif;
+  font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 5px;
+  text-align: center;
+  padding: 0rem 0.5rem;
+  position: relative;
+  
+}
+
+.kanban-column {
+  flex: 1;
+  min-height: 300px;
+  padding: 1rem;
+  border-radius: 16px; 
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  border-top: none;
+  position: relative;
+  overflow: auto;
+}
+
+.kanban-column::-webkit-scrollbar {
+  display: none;
+  width: 0px;
+  height: 0px;
+  background: transparent;
+}
+
+
+.todo-column {
+  border: 4px solid #FF4D3B;
+}
+
+.inprogress-column {
+  border: 4px solid #FF8C00;
+}
+
+.completed-column {
+  border: 4px solid #04B466;
+}
+
+.kanban-task {
+  background-color: white;
+  padding: 0.75rem;
+  border-radius: 6px;
+  cursor: grab;
+  box-shadow: 0 10px 4px #EFEFDA;
+  font-family: 'Glacial Indifference', sans-serif;
+  color: #737373;
+  font-weight: 600;
+  overflow: hidden;
+  font-size: 18px;
+  flex-shrink: 0;
+  
+}
+
+.kanban-task.todo {
+  border-left-color: #FF4D3B;
+}
+
+.kanban-task.inprogress {
+  border-left-color: #FF8C00;
+}
+
+.kanban-task.completed {
+  border-left-color: #04B466;
+}
+
+.kanban-task.dragging {
+  opacity: 0.5;
+  transform: scale(0.98);
+}
+
+.task-name {
+  font-weight: bold;
+  margin-bottom: 0.75rem;
+  padding-bottom: 0.5rem;
+  position: relative;
+  display: grid;
+  justify-items: center;
+}
+
+.task-name::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #EFEFDA, transparent);
+}
+
+.task-info {
+  display: grid;
+  justify-content: space-between;
+  font-size: 0.875rem;
+  justify-content: center;
+  
+}
+
+.add-task-btn {
+  background: #04B466;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  margin-top: 1rem;
+  cursor: pointer;
+  font-family: 'Glacial Indifference', sans-serif;
+}
+
+/* Task Calendar Styles */
+.task-calendar-container {
+  margin-top: 2rem;
+  border: 4px solid #FF4D3B;
+  border-radius: 1rem;
+  padding: 1rem;
+  background-color: white;
+}
+
+.calendar-title {
+  font-family: 'Glacial Indifference', sans-serif;
+  font-size: 32px;
+  color: #1A5E63;
+  font-weight: 1000;
+  margin-bottom: 10px;
+  text-align: center;
+  
+}
+
+.calendar-scroll-wrapper {
+  overflow-x: auto;
+  max-width: 100%;
+  border-radius: 0.5rem;
+  padding: 5px; 
+}
+
+.task-calendar {
+  width: 100%;
+  border-collapse: separate; 
+  border-spacing: 4px; 
+  max-width: 160px;
+}
+
+.task-calendar th {
+  background-color: #F57F17;
+  color: #FFD699;
+  padding: 12px;
+  font-weight: 600;
+  text-align: center;
+  position: sticky;
+  top: 0;
+  border-right: 2px solid #FFD699;
+  font-size: 18px;
+  width: 150px;
+}
+
+.task-calendar th:first-child {
+  background-color: #FFAB00;
+  border-right: 2px solid #FFD699;
+  color: #1A5E63;
+  font-size: 24px;
+}
+
+.task-calendar td {
+  border: 2px solid #FFD699;
+  padding: 8px;
+  min-width: 120px;
+  height: 60px;
+  vertical-align: top;
+  background-color: #FFF4E3; 
+}
+
+.task-calendar .member-cell {
+  background-color: #FFAB00; 
+  font-weight: 600;
+  color: #1A5E63;
+  position: sticky;
+  border-right: 2px solid #FFD699;
+  font-size: 24px;
+  left: 0;
+  text-align: center;
+  width: 150px;
+}
+
+.task-item-calendar {
+  background-color: #F58A07;
+  color: white;
+  padding: 4px 8px;
+  border-radius: 4px;
+  margin-bottom: 4px;
+  font-size: 14px;
+  word-break: break-word;
+  min-height: 20px;
+}
+
+/* Status-specific task colors */
+.task-item-calendar.todo { background-color: #FF4D3B; }
+.task-item-calendar.inProgress { background-color: #FF8C00; }
+.task-item-calendar.completed { background-color: #04B466; }
+
+
+.calendar-scroll-wrapper {
+  overflow-x: auto;
+  scrollbar-width: 18px;
+  padding-bottom: 4px;
+}
+
+
+.calendar-scroll-wrapper::-webkit-scrollbar {
+  height: 16px; 
+}
+
+.calendar-scroll-wrapper::-webkit-scrollbar-track {
+  background: #E8EAF0; 
+  border-radius: 4px;
+  margin: 0 50px; 
+  background-clip: content-box; 
+}
+
+.calendar-scroll-wrapper::-webkit-scrollbar-thumb {
+  background-color: #FFFFFF; 
+  border-radius: 4px;
+  min-width: 40px; 
+  border: 1px solid #E8EAF0; 
+  
+}
+
+.calendar-scroll-wrapper::-webkit-scrollbar-thumb:hover {
+  background-color: #F5F5F5; 
+}
+
+.add-task-btn {
+  background-color: #04B466;
+  color: white;
+  border: none;
+  padding: 2px 16px; 
+  border-radius: 20px;
+  cursor: pointer;
+  font-family: 'Glacial Indifference', sans-serif;
+  font-weight: 600;
+  font-size: 16px;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.add-task-btn:hover {
+  background-color: #038a54;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+}
+
+.add-task-btn:active {
+  transform: translateY(0);
+}
+
+/* Task Modal Styles */
+#taskModal .modal-content {
+  background-color: white;
+  border-radius: 1rem;
+  padding: 2rem;
+  width: 24rem;
+  border: 4px solid #1A5E63;
+  position: relative;
+  font-family: 'Glacial Indifference', sans-serif;
+}
+
+#taskModal h2 {
+  text-align: center;
+  width: 100%; 
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 26px;
+  font-weight: 1000;
+  color: #1A5E63;
+  margin-top: -18px;
+  transform: scale(1,0.9);
+  font-family: 'Glacial Indifference', sans-serif;
+}
+
+#taskModal input[type="text"],
+#taskModal input[type="date"],
+#taskModal input[type="time"],
+#taskModal textarea {
+  border: 1px solid #1A5E63;
+  border-radius: 20px;
+  padding: 0.5rem 1rem;
+  width: 100%;
+  font-family: 'Glacial Indifference', sans-serif;
+}
+
+#taskModal textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+#taskMemberSuggestions div {
+  padding: 8px 12px;
+  cursor: pointer;
+}
+
+#taskMemberSuggestions div:hover {
+  background-color: #1A5E63;
+  color: white;
+}
+
+#assignAllCheckbox {
+  accent-color: #1A5E63;
+}
+
+#taskMemberList div {
+  background-color: #1A5E63;
+  color: white;
+  padding: 0.3rem 0.7rem;
+  border-radius: 9999px;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+  height: 2rem;
+}
+
+#taskMemberList span {
+  cursor: pointer;
+  font-size: 0.75rem;
+  font-weight: bold;
+  background-color: white;
+  color: #1A5E63;
+  padding: 0.1rem 0.3rem;
+  border-radius: 9999px;
+  display: inline-block;
+}
+
+#taskMemberSuggestions div {
+  padding: 8px 12px;
+  cursor: pointer;
+}
+
+#taskMemberSuggestions div:hover {
+  background-color: #1A5E63;
+  color: white;
+}
+
+.empty-task {
+  color: #999;
+  font-style: italic;
+  text-align: center;
+  padding: 12px;
+}
+
+.task-table1 .empty-task,
+.task-table2 .empty-task {
+  border: 1px dashed #eee;
+}
+
+.completed-section .empty-task {
+  border-bottom: 1px dashed #EFEFDA;
+}
